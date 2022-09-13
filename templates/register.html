@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Auto Company</title>
+	<link rel="stylesheet" href={% static "style.css" %} type="text/css">
+</head>
+<body>
+	<div id="header">
+		<div class="clearfix">
+			<ul class="navigation">
+				<li class="active">
+					<a href="/">Home</a>
+				</li>
+				{% if not user.is_authenticated%}
+				<li>
+					<a href="/accounts/login">Login</a>
+				</li>
+				{%endif%}
+				<li>
+					<a href="/products/">Products</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+	
+		<div class="featured">
+			<h2>Register</h2>
+            <h2>
+    <form action="register" method="post">
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="First Name"> <br>
+        <input type="text" name="last_name" placeholder="Last Name"> <br>
+        <input type="text" name="user_name" placeholder="User Name"> <br>
+        <input type="email" name="email" placeholder="Email"> <br>
+        <input type="password" name="password1" placeholder="Password"> <br>
+        <input type="password" name="password2" placeholder="Re-Type Password"> <br> <br>
+        <input type="submit" value="Register">
+    </form>
+    {%for message in messages%}
+    <h2> {{message}} </h2>
+    {%endfor%}
+</h2>
+		</div>
+
+	
+
+</body>
+</html>

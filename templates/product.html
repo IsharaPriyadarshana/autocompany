@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Auto Company</title>
+	<link rel="stylesheet" href={% static "style.css" %} type="text/css">
+</head>
+<body>
+	<div id="header">
+		<div class="clearfix">
+			<ul class="navigation">
+				<li class="active">
+					<a href="/">Home</a>
+				</li>
+				{% if user.is_authenticated%}
+				<li> Hello, {{user.first_name}} </li>
+				<li>
+					<a href="/accounts/logout">Logout</a>
+				</li>
+				{%endif%}
+			</ul>
+		</div>
+	</div>
+	
+		<div class="featured">
+			<h2>{{product.name}}</h2>
+			<ul class="clearfix">
+				<li>
+					<div class="frame1">
+						<div class="box">
+							<img src={{product.img.url}} alt="Img" height="130" width="197">
+						</div>
+					</div>
+					<p>
+						</b> {{product.desc}} </b>${{product.price}}
+					</p>
+                </br>
+                    <p>
+                        {{product.longDesc}}
+                    </p>
+                    <input type="number" id="count_{{product.id}}" name="count_{{product.id}}" min="1" value="1"> <br><br>
+					<a href = "javascript:;" onclick = "this.href='/cart/add?count=' + document.getElementById('count_{{product.id}}').value + '&id={{product.id}}'" class="more"> Add to Cart</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>

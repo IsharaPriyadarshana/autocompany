@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Auto Company</title>
+	<link rel="stylesheet" href={% static "style.css" %} type="text/css">
+</head>
+<body>
+	<div id="header">
+		<div class="clearfix">
+			<ul class="navigation">
+				{% if user.is_authenticated%}
+				<li> Hello, {{user.first_name}} </li>
+				<li>
+					<a href="accounts/logout">Logout</a>
+				</li>
+				{%else%}
+				<li>
+					<a href="accounts/register">Register</a>
+				</li>
+				<li>
+					<a href="accounts/login">Login</a>
+				</li>
+				{%endif%}
+				<li>
+					<a href="products/">Products</a>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+	
+		<div class="featured">
+			<h2>Welcome to AutoCompany</h2>
+			<h2><img src={% static 'wallpaper.png' %} alt="Img" ></h2>
+
+		</div>
+
+	
+
+</body>
+</html>

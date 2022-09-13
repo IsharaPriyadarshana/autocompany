@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Company</title>
+</head>
+<body bgcolor="cyan">
+    
+</body>
+</html>
+
+{% load static %}
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Auto Company</title>
+	<link rel="stylesheet" href={% static "style.css" %} type="text/css">
+</head>
+<body>
+	<div id="header">
+		<div class="clearfix">
+			<ul class="navigation">
+				<li class="active">
+					<a href="/">Home</a>
+				</li>
+				{% if user.is_authenticated%}
+				<li> Hello, {{user.first_name}} </li>
+				<li>
+					<a href="/accounts/logout">Logout</a>
+				</li>
+                <li>
+					<a href="/products/">Products</a>
+				</li>
+				{%endif%}
+			</ul>
+		</div>
+	</div>
+	
+		<div class="featured">
+            <h2>Cart</h2>
+            <h2>
+            <table>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Total Price</th>
+                </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{item.product.name}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.product.price}}</td>
+                <td>{{item.price}}</td>
+                <td> <a href = "/cart/remove?id={{item.id}}">Remove </a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3"> <b>Net Total: </b></td>
+                <td><b>{{total}}</b></td>
+              </tr>
+            </table> <br> <br>
+            <form action="/order/" method="post">
+                {% csrf_token %}
+                Order Date: <input type="datetime-local" id="orderDate" name="orderDate" title="Order Date:" /> </br><br>
+                <input type="submit" value="Check Out">
+            </form>
+        </h2>
+		</div>
+	</div>
+
+</body>
+</html>
